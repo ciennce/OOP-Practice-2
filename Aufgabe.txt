@@ -1,0 +1,124 @@
+OOP-Practice-2 – Bibliothek
+===========================
+
+Eine Konsolen-App für eine kleine Bibliothek. Es gibt Medien, die ausgeliehen
+und zurückgegeben werden können, und Mitglieder, die ausleihen.
+
+Die Aufgabe baut auf OOP-Practice-1 (Bank) auf und übt gezielt die dort offenen
+Punkte: Modell ohne Konsole, Eingabevalidierung, Kapselung. Neu dazu kommt
+Vererbung.
+
+
+1. Fachliche Anforderungen
+--------------------------
+
+Medien
+  - Jedes Medium hat Id, Titel und Erscheinungsjahr.
+  - Drei Arten:
+      Buch         zusätzlich Autor, Seitenzahl
+      DVD          zusätzlich Regisseur, Laufzeit in Minuten
+      Zeitschrift  zusätzlich Ausgabe-Nummer
+  - Zeitschriften dürfen nicht ausgeliehen werden.
+
+Mitglieder
+  - Mitgliedsnummer und Name.
+  - Ein Mitglied darf höchstens drei Medien gleichzeitig haben.
+
+Ausleihe
+  - Ein Medium kann nur ausgeliehen werden, wenn
+      a) es verfügbar ist (nicht bereits ausgeliehen),
+      b) das Mitglied unter dem Limit liegt,
+      c) das Medium ausleihbar ist (keine Zeitschrift).
+  - Rückgabe nur durch das Mitglied, das es aktuell hat.
+
+Menü
+  [1] Medium anlegen (Art wählen, dann die passenden Felder abfragen)
+  [2] Mitglied anlegen
+  [3] Ausleihen (Mitgliedsnummer + Medien-Id)
+  [4] Zurückgeben (Mitgliedsnummer + Medien-Id)
+  [5] Alle Medien anzeigen, mit Status (verfügbar / ausgeliehen an ...)
+  [6] Alle Ausleihen eines Mitglieds anzeigen
+  [7] Beenden
+
+
+2. Technische Regeln (der eigentliche Übungsteil)
+-------------------------------------------------
+
+1) Kein Console-Aufruf in den Modellklassen.
+   Media, Book, Dvd, Magazine, Member und Library dürfen weder lesen noch
+   schreiben. Nur die GUI-Klasse redet mit der Konsole.
+
+2) Jede Zahleneingabe mit int.TryParse.
+   Ein Buchstabe darf nirgends abstürzen. Schreib dir eine Helfermethode
+   ReadInt(string prompt) in der GUI, die so lange fragt, bis eine gültige
+   Zahl kommt.
+
+3) Rückgabewerte statt Meldungen.
+   Library.Lend gibt zurück, ob es geklappt hat und warum nicht:
+       enum LendResult { Ok, MediaNotFound, MemberNotFound, NotAvailable,
+                         NotLendable, LimitReached }
+   Die GUI übersetzt das Ergebnis in Text. Gleiches Prinzip für Return.
+
+4) Alle Listen privat.
+   Nach außen nur Methoden oder IReadOnlyList<T>. Kein öffentliches Feld.
+
+5) Vererbung.
+   Media ist eine abstrakte Basisklasse.
+   - IsLendable ist eine virtuelle Property (Standard true), die Magazine
+     mit false überschreibt.
+   - Describe() ist abstrakt und liefert pro Art eine passende Zeile für
+     die Anzeige, z. B.
+       "Buch: Der Herr der Ringe (1954), Tolkien, 1200 Seiten"
+       "DVD: Inception (2010), Nolan, 148 min"
+
+6) Ids vergibt die Library selbst, fortlaufend ab 1.
+   Der Nutzer tippt beim Anlegen keine Id ein.
+
+7) Der Beenden-Fall muss die Hauptschleife wirklich verlassen
+   (return oder running-Flag, nicht nur break im switch).
+
+
+3. Vorgeschlagene Struktur
+--------------------------
+
+OOP-Practice-2/
+  Main/Program.cs
+  Gui/GUI.cs                 Menü, Eingabe, Ausgabe, ReadInt
+  Library/Library.cs         Listen, AddMedia, AddMember, Lend, Return,
+                             FindMedia, FindMember
+  Library/LendResult.cs      enum
+  Model/Media.cs             abstract
+  Model/Book.cs
+  Model/Dvd.cs
+  Model/Magazine.cs
+  Model/Member.cs
+
+
+4. Empfohlene Reihenfolge
+-------------------------
+
+1. Model-Klassen schreiben (Media, Book, Dvd, Magazine, Member).
+2. Library schreiben mit Lend und Return.
+3. Ein kleines Test-Main schreiben, das Library OHNE GUI benutzt:
+     - zwei Bücher und eine Zeitschrift anlegen
+     - ein Mitglied anlegen
+     - dreimal ausleihen -> Ok
+     - viertes Mal -> LimitReached
+     - Zeitschrift ausleihen -> NotLendable
+   Wenn das ohne eine einzige Console-Zeile im Modell funktioniert,
+   ist die Trennung sauber.
+4. Erst dann die GUI bauen.
+
+
+5. Erweiterung, falls fertig
+----------------------------
+
+- Rückgabedatum und Mahnung:
+  Beim Ausleihen wird DateTime.Now gespeichert. Ein Menüpunkt listet alle
+  Ausleihen, die älter als 14 Tage sind.
+
+- Speichern und Laden:
+  Medienliste beim Beenden in eine Textdatei schreiben
+  (File.WriteAllLines) und beim Start wieder laden (File.ReadAllLines).
+  Hinweis: Die Art des Mediums muss mit in die Zeile, sonst weiß man beim
+  Laden nicht, welche Klasse erzeugt werden soll.
