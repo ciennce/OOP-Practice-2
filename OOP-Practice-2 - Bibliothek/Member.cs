@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace OOP_Practice_2___Bibliothek
+﻿namespace OOP_Practice_2___Bibliothek
 {
     class Member
     {
@@ -11,3 +9,4 @@ namespace OOP_Practice_2___Bibliothek
         }
     }
 }
+
