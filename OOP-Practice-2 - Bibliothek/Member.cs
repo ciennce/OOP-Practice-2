@@ -1,10 +1,13 @@
-﻿namespace OOP_Practice_2___Bibliothek
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace OOP_Practice_2___Bibliothek
 {
     class Member
     {
-        public Member()
+        public string Name { get; set; }
+        public Member(string name)
         {
-            
+            Name = name;
         }
     }
 }

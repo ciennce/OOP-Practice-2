@@ -1,6 +1,6 @@
 ﻿namespace OOP_Practice_2___Bibliothek
 {
-    class Media
+    abstract class Media
     {
         public Media()
         {
