@@ -1,4 +1,4 @@
-﻿namespace OOP_Practice_2___Bibliothek
+﻿namespace OOP_Practice_2___Bibliothek.Main
 {
     class Program
     {
