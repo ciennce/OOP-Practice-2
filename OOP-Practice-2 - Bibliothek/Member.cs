@@ -1,10 +1,10 @@
 ﻿namespace OOP_Practice_2___Bibliothek
 {
-    class Program
+    class Member
     {
-        static void Main(string[] args)
+        public Member()
         {
-
+            
         }
     }
 }

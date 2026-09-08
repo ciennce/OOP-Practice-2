@@ -1,8 +1,8 @@
 ﻿namespace OOP_Practice_2___Bibliothek
 {
-    class Program
+    class Media
     {
-        static void Main(string[] args)
+        public Media()
         {
 
         }
