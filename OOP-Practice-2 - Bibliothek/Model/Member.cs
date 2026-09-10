@@ -4,12 +4,16 @@
     {
         public string Name { get; set; }
 
-        public int Id { get; set; }
-        public Member(string name, int id)
+        public int MemberId { get; set; }
+
+        public Member(string name, int memberId)
         {
             Name = name;
-            Id = id;
+            MemberId = memberId;
         }
+
+        public List<Media> _type { get; } = new List<Media>();
+
     }
 }
 
