@@ -10,10 +10,17 @@ namespace OOP_Practice_2___Bibliothek.Library
             
         }
 
-        public Media Lend(Member member, Member typeOfItem)
+        public bool Lend(Member member, Media media)
         {
-            if()
-            return typeOfItem;
+            if(member._Type.Count < 3)
+            {
+                member._Type.Add(media);
+                media.LendTo(member);
+                return true;
+            }else
+            {
+                return false;
+            }
         }
     }
 }

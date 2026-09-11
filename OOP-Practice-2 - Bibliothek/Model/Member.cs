@@ -6,13 +6,14 @@
 
         public int MemberId { get; set; }
 
-        public Member(string name, int memberId)
+        public List<Media> _Type { get; set; } = new List<Media>();
+
+        public Member(string name, int memberId, List<Media> _type)
         {
             Name = name;
             MemberId = memberId;
+            _Type = _type;
         }
-
-        public List<Media> _type { get; } = new List<Media>();
 
     }
 }
