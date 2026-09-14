@@ -1,11 +1,12 @@
 ﻿namespace OOP_Practice_2___Bibliothek.Model
 {
-    class Dvd
+    class Dvd : Media
     {
         private string Director { get; set; }
         private string Duration { get; set; }
 
-        public Dvd(string director, string duration)
+        public Dvd(int id, string title, string year, string director, string duration) 
+            : base(id, title, year)
         {
             Director = director;
             Duration = duration;

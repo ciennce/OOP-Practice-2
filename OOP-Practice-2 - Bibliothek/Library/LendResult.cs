@@ -2,5 +2,11 @@
 {
     enum LendResult
     {
+        Ok,
+        MediaNotFound,
+        MemberNotFound,
+        NotAvailable,
+        NotLendable,
+        LimitReached
     }
 }

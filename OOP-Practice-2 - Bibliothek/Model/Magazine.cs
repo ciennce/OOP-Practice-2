@@ -1,10 +1,11 @@
 ﻿namespace OOP_Practice_2___Bibliothek.Model
 {
-    class Magazine
+    class Magazine : Media
     {
-        private string IssueNumber {  get; set; }
+        private string IssueNumber { get; set; }
 
-        public Magazine(string issueNumber)
+        public Magazine(int id, string title, string year, string issueNumber)
+            : base(id, title, year)
         {
             IssueNumber = issueNumber;
         }
