@@ -1,7 +1,6 @@
 ﻿using OOP_Practice_2___Bibliothek.Model;
-using System.Reflection.Metadata.Ecma335;
 
-namespace OOP_Practice_2___Bibliothek.Library 
+namespace OOP_Practice_2___Bibliothek.Library
 {
     class Library
     {
@@ -11,7 +10,7 @@ namespace OOP_Practice_2___Bibliothek.Library
 
         public LendResult Lend(int memberId, int mediaId)
         {
-            
+
             var member = _members.FirstOrDefault(m => m.MemberId == memberId);
             if (member == null) return LendResult.MemberNotFound;
 
@@ -19,11 +18,11 @@ namespace OOP_Practice_2___Bibliothek.Library
             if (media == null) return LendResult.MediaNotFound;
 
             if (!media.IsAvailable) return LendResult.NotAvailable;
-            if (member.Type.Count >= 3) return LendResult.LimitReached;
-            if(!media.IsLendable) return LendResult.NotLendable;
+            if (member.BorrowedMedia.Count >= 3) return LendResult.LimitReached;
+            if (!media.IsLendable) return LendResult.NotLendable;
 
             media.LendTo(member);
-            member.Type.Add(media);
+            member.BorrowedMedia.Add(media);
             return LendResult.Ok;
         }
 
@@ -32,9 +31,12 @@ namespace OOP_Practice_2___Bibliothek.Library
             var member = _members.FirstOrDefault(m => m.MemberId == memberId);
             if (member == null) return LendResult.MemberNotFound;
 
-            var media = member.Type.FirstOrDefault(i =>i.Id == mediaId);
-            if(media == null) return LendResult.MediaNotFound;
+            var media = member.BorrowedMedia.FirstOrDefault(i => i.Id == mediaId);
+            if (media == null) return LendResult.MediaNotFound;
 
+            member.BorrowedMedia.Remove(media);
+            media.BroughtBack();
+            return LendResult.Ok;
         }
-    }  
+    }
 }

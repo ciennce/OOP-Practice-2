@@ -8,5 +8,11 @@
             var (day, hour, minute) = (datetime.Day, datetime.Hour, datetime.Minute);
             return datetime;
         }
+
+        public DateTime CalculateTime(DateTime time)
+        {
+           
+        }
+
     }
 }
