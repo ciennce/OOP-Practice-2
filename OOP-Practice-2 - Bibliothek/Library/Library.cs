@@ -20,29 +20,64 @@ namespace OOP_Practice_2___Bibliothek.Library
             var member = _members.FirstOrDefault(m => m.MemberId == memberId);
             if (member == null)
             {
-                return LendResult.
+                return LendResult.MemberNotFound;
             }
             else
             {
-                var media = _mediaStorage.FirstOrDefault(i => i.Id == mediaId);
-                if (media == null)
+                if (member.Type.Count >= 3)
                 {
-                    return LendResult.
+                    return LendResult.LimitReached;
                 }
                 else
                 {
-                    if (media.IsAvailable)
+                    var media = _mediaStorage.FirstOrDefault(i => i.Id == mediaId);
+                    if (!media.IsAvailable || media == null)
                     {
-                        media.LendTo(member);
-                        return LendResult.
+                        return LendResult.NotAvailable;
                     }
                     else
                     {
-                        return 
-                    }
+                        if (!media.IsLendable || media == null)
+                        {
+                            return LendResult.NotLendable;
+                        }
+                        else
+                        {
+                            member.Type.Add(media);
+                            return LendResult.Ok;
 
+                        }
+                    }
                 }
-            }    
+            }
+
+
+
+
+
+
+
+            //else
+            //{
+            //    var media = _mediaStorage.FirstOrDefault(i => i.Id == mediaId);
+            //    if (media == null)
+            //    {
+            //        return LendResult.
+            //    }
+            //    else
+            //    {
+            //        if (media.IsAvailable)
+            //        {
+            //            media.LendTo(member);
+            //            return LendResult.
+            //        }
+            //        else
+            //        {
+            //            return 
+            //        }
+            //
+            //    }
+            //}    
             
         }
 
