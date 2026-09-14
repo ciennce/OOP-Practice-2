@@ -10,28 +10,42 @@ namespace OOP_Practice_2___Bibliothek.Library
             
         }
 
-        public List<Media> MediaStorage { get; set; }
+        private readonly List<Media> _mediaStorage = new();
+        private readonly List<Member> _members = new();
 
-        public bool Lend(Member member, Media media)
+
+        public LendResult Lend(int memberId, int mediaId)
         {
-            if(member.Type.Count < 3)
+            
+            var member = _members.FirstOrDefault(m => m.MemberId == memberId);
+            if (member == null)
             {
-                if (media.IsAvailable)
-                {
-                    member.Type.Add(media);
-                    media.LendTo(member);
-                    return true;
-                }
-                return false;
-            }else
-            {
-                return false;
+                return LendResult.
             }
+            else
+            {
+                var media = _mediaStorage.FirstOrDefault(i => i.Id == mediaId);
+                if (media == null)
+                {
+                    return LendResult.
+                }
+                else
+                {
+                    if (media.IsAvailable)
+                    {
+                        media.LendTo(member);
+                        return LendResult.
+                    }
+                    else
+                    {
+                        return 
+                    }
+
+                }
+            }    
+            
         }
 
-        public void AddItem(Media media)
-        {
-            MediaStorage.Add(media);
-        }
+
     }
 }
