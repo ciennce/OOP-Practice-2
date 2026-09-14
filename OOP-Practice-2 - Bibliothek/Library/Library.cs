@@ -1,4 +1,5 @@
 ﻿using OOP_Practice_2___Bibliothek.Model;
+using System.Reflection.Metadata.Ecma335;
 
 namespace OOP_Practice_2___Bibliothek.Library 
 {
@@ -24,6 +25,16 @@ namespace OOP_Practice_2___Bibliothek.Library
             media.LendTo(member);
             member.Type.Add(media);
             return LendResult.Ok;
+        }
+
+        public LendResult ReturnMedia(int memberId, int mediaId)
+        {
+            var member = _members.FirstOrDefault(m => m.MemberId == memberId);
+            if (member == null) return LendResult.MemberNotFound;
+
+            var media = member.Type.FirstOrDefault(i =>i.Id == mediaId);
+            if(media == null) return LendResult.MediaNotFound;
+
         }
     }  
 }

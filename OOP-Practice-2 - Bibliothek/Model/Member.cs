@@ -8,6 +8,8 @@
 
         public List<Media> Type { get; set; } = new List<Media>();
 
+        public List<DateTime> Times { get; set; } = new List<DateTime>();
+
         public Member(string name, int memberId, List<Media> type)
         {
             Name = name;
