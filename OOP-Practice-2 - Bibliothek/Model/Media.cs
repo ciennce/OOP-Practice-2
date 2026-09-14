@@ -23,5 +23,7 @@
             BorrowedBy = member;
         }
 
+        public void BroughtBack(Member member){BorrowedBy = null;}
+
     }
 }
