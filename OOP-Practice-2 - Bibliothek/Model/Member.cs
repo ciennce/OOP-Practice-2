@@ -6,7 +6,7 @@
 
         public int MemberId { get; set; }
 
-        public List<Media> Type { get; set; } = new List<Media>();
+        public List<Media> BorrowedMedia { get; set; } = new List<Media>();
 
         public List<DateTime> Times { get; set; } = new List<DateTime>();
 
@@ -14,7 +14,7 @@
         {
             Name = name;
             MemberId = memberId;
-            Type = type;
+            BorrowedMedia = type;
         }
 
         
