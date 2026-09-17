@@ -15,10 +15,7 @@
             Name = name;
             MemberId = memberId;
             BorrowedMedia = type;
-        }
-
-        
-
+        }   
     }
 }
 

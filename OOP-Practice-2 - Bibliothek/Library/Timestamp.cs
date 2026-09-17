@@ -11,8 +11,7 @@
 
         public DateTime CalculateTime(DateTime time)
         {
-           
+           return DateTime.Now; //Placeholder
         }
-
     }
 }

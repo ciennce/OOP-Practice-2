@@ -1,5 +1,4 @@
 ﻿using OOP_Practice_2___Bibliothek.Library;
-using System.Data.SqlTypes;
 
 namespace OOP_Practice_2___Bibliothek.Gui
 {
@@ -12,6 +11,6 @@ namespace OOP_Practice_2___Bibliothek.Gui
 
             if (!isValid) return LendResult.Invalid;
             return LendResult.Ok;
-        }    
+        }
     }
 }

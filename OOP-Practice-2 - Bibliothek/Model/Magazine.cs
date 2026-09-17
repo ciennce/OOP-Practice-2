@@ -9,7 +9,6 @@
         {
             IssueNumber = issueNumber;
         }
-
         public override bool IsLendable => false;
     }
 }
