@@ -6,11 +6,9 @@ namespace OOP_Practice_2___Bibliothek.Gui
     {
         public LendResult ReadInt(string prompt)
         {
-            bool hasWhiteSpace = prompt.Any(char.IsWhiteSpace);
-            bool isValid = !hasWhiteSpace && uint.TryParse(prompt, out _);
-
-            if (!isValid) return LendResult.Invalid;
+            if (!int.TryParse(prompt, out var result)) return LendResult.Invalid;
             return LendResult.Ok;
+
         }
     }
 }
