@@ -7,6 +7,7 @@
         MemberNotFound,
         NotAvailable,
         NotLendable,
-        LimitReached
+        LimitReached,
+        Invalid
     }
 }

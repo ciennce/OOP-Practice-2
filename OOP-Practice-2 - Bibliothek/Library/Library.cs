@@ -10,7 +10,6 @@ namespace OOP_Practice_2___Bibliothek.Library
 
         public LendResult Lend(int memberId, int mediaId)
         {
-
             var member = _members.FirstOrDefault(m => m.MemberId == memberId);
             if (member == null) return LendResult.MemberNotFound;
 
@@ -40,3 +39,4 @@ namespace OOP_Practice_2___Bibliothek.Library
         }
     }
 }
+ 
